@@ -15,4 +15,9 @@ router.use('/hero', hero);
 router.use('/team', team);
 router.use('/user', user);
 
+router.use('/favourite', favourite);
+router.use('/hero', hero);
+router.use('/team', team);
+router.use('/user', user);
+
 module.exports = router;
