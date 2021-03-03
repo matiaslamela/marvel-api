@@ -3,11 +3,15 @@ const teamModel = require('../controllers/team');
 const router = Router();
 const {Hero} = require('../db');
 
-router.get('/hero', function (req, res) {
+router.get('/hero/:teamId', function (req, res) {
+	const teamId = req.params.teamId;
 	teamModel
 		.get({
 			include: {
 				model: Hero,
+			},
+			where: {
+				id: teamId,
 			},
 		})
 		.then((team) => {

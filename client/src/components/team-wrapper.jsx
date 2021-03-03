@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Card, ListGroup, Button, Modal} from 'react-bootstrap';
 import {teams} from '../mock/team-hero';
 const TeamWrapper = ({team}) => {
@@ -9,9 +9,15 @@ const TeamWrapper = ({team}) => {
 	}
 	function onSelectTeam(id) {
 		toggleShow();
-		setHeros(() => {
-			return teams?.find((e) => e.id === id)?.heros || [];
-		});
+		fetch(`http://localhost:3001/team/hero/${id}`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((parsedResponse) => {
+				setHeros(() => {
+					return parsedResponse[0].heros || [];
+				});
+			});
 	}
 
 	let card = (
